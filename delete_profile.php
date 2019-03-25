@@ -13,51 +13,26 @@ if (isset($_GET['uid'])){
 	
 }
 
-if (empty($_SESSION['uid'])){
-
-	if (isset($_GET['uid']) && ($_SESSION['uid'] !=''))
-	{
-   		$user_info = @fetch_user_info($_GET['uid']);
-   		$id = $_GET['uid'];
-	}
-	
-} else
-{
-   if (empty($user_info)){
-   
-   		$user_info = @fetch_user_info($_SESSION['uid']);
-   		$id = $_SESSION['uid'];
-   
-   } else {
-   
-   		$user_info = @fetch_user_info($_SESSION['uid']);
-   		$id = $_SESSION['uid'];
-   	
-   }
-}    
-
-
-
-$errors = array();
-
-//since it actually works, this is to prevent accidental deletions
-if (isset($_POST['submit'])){
-
-$errors[] = 'You cannot Delete records at this time.';
-
+if (isset($_GET['uid'])){
+   	$user_info = @fetch_user_info($_GET['uid']);
+   	$id = $_GET['uid'];
 }
 
-if (empty($errors)){ 
+//$errors = array();
 
-echo "<br>Delete is enabled for now.";
+if(isset($_POST['submit'])){
+
+	//$errors[] = 'You need to be logged in to Delete records.';
+
+	echo "<br>Delete is enabled for now.";
 
 	delete_profile_info($id);
-
+				
 } else { 
 
     echo "delete profile Complains!";
     
-    echo $errors;
+    //echo $errors;
     
 }
 
@@ -85,6 +60,8 @@ echo "<br>Delete is enabled for now.";
         </center>
         <p>
     
+    <form action="" method="post">
+    
    <?php         
                      
 	$user_info = fetch_user($_GET['uid']);
@@ -100,7 +77,6 @@ echo "<br>Delete is enabled for now.";
 ?>
     <p>
     <img src=template.jpg height=75 width=75>
-    <img src="data:image/jpg;base64,'.base64_encode(<?php echo $user_info['avatar_image'] ?>).'"/>
          
     <p>
     <a href="profile.php?uid=<?php echo $user_info['user_id']; ?>">
@@ -116,13 +92,7 @@ echo "<br>Delete is enabled for now.";
     }
          ?>
          
-       
-
-
-
-               
-               
-               <script>
+<script>
 function myFunction() {
   var txt;
   if (confirm("Delete Record!")) {
@@ -134,11 +104,14 @@ function myFunction() {
 }
 </script>
 
+
                <div>
                <p>
                <br>
-                   <button onclick="myFunction()"><input type="submit" name="submit" value="Delete" /></button>
+               <button onclick="myFunction()"><input type="submit" name="submit" value="Delete" /></button>
+               
     
+                   
     	</form>
     
                
