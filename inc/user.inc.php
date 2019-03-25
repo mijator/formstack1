@@ -144,14 +144,16 @@ mysqli_close($link);
 
 function set_profile_info($email, $firstname, $lastname, $password, $avatar){
 
-//$link = new mysqli("localhost", "root", "", "formstack1");
+$link = new mysqli("localhost", "root", "", "formstack1");
 
 $email		= mysqli_real_escape_string($link, htmlentities($email)); 
 $firstname	= mysqli_real_escape_string($link, htmlentities($firstname)); 
 $lastname	= mysqli_real_escape_string($link, htmlentities($lastname)); 
 $password	= mysqli_real_escape_string($link, htmlentities($password)); 
 
-$var_dump($email);
+$password = sha1($password);
+
+//$var_dump($email);
 
 if (file_exists($avatar)){
 
@@ -163,10 +165,10 @@ echo "Avatar File Exists!";
 	$sql = "UPDATE `users` SET `email_address`= '{$email}',  
 	`first_name`= '{$firstname}',  
 	`last_name`= '{$lastname}',  
-	`pass_word`= '{$password}' WHERE user_id = {$_SESSION['uid']}";
+	`pass_word`= '{$password}' WHERE user_id = {$_GET['uid']}";
 		
 if (mysqli_query($link, $sql)) {
-    echo "New record created successfully";
+    echo "Record updated successfully";
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($link);
 }

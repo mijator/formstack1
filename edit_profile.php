@@ -5,20 +5,11 @@ include("{$path}/init.inc.php");
 
 $user_info = array();
 
-if (isset($_GET['uid']) && $_SESSION['uid'] !='')
+if (isset($_GET['uid']))
 {
    $user_info = fetch_user_info($_GET['uid']);
 }
-else
-{
-   if (empty($user_info)){
-   
-   } else {
-   
-   		$user_info = fetch_user_info($_SESSION['uid']);
-   	
-   }
-}     
+
 
 
 if (isset($_POST['firstname'], $_POST['lastname'], $_POST['email'], 
