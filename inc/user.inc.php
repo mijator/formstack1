@@ -178,14 +178,9 @@ mysqli_close($link);
 
 function delete_profile_info($uid){
 
-	echo "Hello Delete Profile!";
-	
-	//echo $uid;
-	
+	echo "";
 	
 	$uid = (int)$uid;
-	
-	//echo $uid;
     		
 	$link = new mysqli("localhost", "root", "", "formstack1");
 
