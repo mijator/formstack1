@@ -24,6 +24,7 @@ on the avatar_image column so that it displays as MIME TYPE = .jpeg . I used php
 Limitations:
 
 1. Uploading avatar does not work yet.
+2. PHPUnit has not been implemented yet.
 
 Enjoy!
 
