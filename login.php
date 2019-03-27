@@ -13,6 +13,10 @@ include("{$path}/init.inc.php");
 
 $errors = array();
 
+if (isset($_SESSION['uid'])){
+	header("Location: profile.php");
+} 
+
 //validation continues inside this section
 
 if (isset ($_POST['email'])){
@@ -68,7 +72,7 @@ if (empty($errors)){
     
     		echo "<br>All Is Good Here.";
     		echo $_SESSION['uid'];
-    	
+    		header("Location: profile.php");
     		
     	} else {
     
@@ -110,14 +114,26 @@ if (empty($errors)){
 </form>
 
 <div>
-      <center>
+     <p>
+   <br>
+   </font>
+   </td>
+   <tr>
+   <td>
+   <font face=arial>
+   	<center>
        <p>
+       <br>
+       <a href=index.php>Home</a><br>
          <a href=login.php>Login</a>  | 
          <a href=logout.php>Log Out</a><br>
        <a href=add_profile.php>Register</a>  |   
        <a href=user_list.php>View Users</a>  
        <p>
-       </center>   
+    </center>   
+    </font>
+    </td>
+	</table>
        
        </div>   
        

@@ -24,15 +24,26 @@
 
 
 <div>
-      <center>
+    <p>
+   <br>
+   </font>
+   </td>
+   <tr>
+   <td>
+   <font face=arial>
+   	<center>
        <p>
-         <a href=profile.php>Home</a><br> 
+       <br>
+       <a href=index.php>Home</a><br>
          <a href=login.php>Login</a>  | 
          <a href=logout.php>Log Out</a><br>
        <a href=add_profile.php>Register</a>  |   
        <a href=user_list.php>View Users</a>  
        <p>
-       </center>   
+    </center>   
+    </font>
+    </td>
+	</table> 
        
        </div>   
        

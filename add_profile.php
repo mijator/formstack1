@@ -5,26 +5,49 @@ include("{$path}/init.inc.php");
 
 $user_info = array();
 
-if (isset($_GET['uid']) && $_SESSION['uid'] !='')
-{
-   $user_info = fetch_user_info($_GET['uid']);
+if (isset($_GET['uid'])){
+    	$user_info = fetch_user($_GET['uid']);
+    	$id = $_GET['uid'];
+    } else if (isset($_SESSION['uid'])){
+    	$user_info = fetch_user($_SESSION['uid']);
+    	$id = $_SESSION['uid'];
+    } else {
+    
 }
-else
-{
-   if (empty($user_info)){
-   
-   } else {
-   
-   	$user_info = fetch_user_info($_SESSION['uid']);
-   }
-}    
 
 if (isset($_POST['firstname'], $_POST['lastname'], $_POST['email'], 
 $_POST['password'])) {
 
+$email = $_POST['email'];
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
+$password = $_POST['password'];
+//$avatar = $_POST['avatar'];
+$password = sha1($password);
+
 $errors = array();
 
 //validation continues inside this section
+
+//$link = mysqli_connect("localhost", "root", "", "formstack1");
+
+//$imageName = mysqli_real_escape_string($link, $_FILES['avatar']['name']);
+//$imageData = mysqli_real_escape_string($link, file_get_contents($_FILES['avatar']['tmp_name']));
+//$imageType = mysqli_real_escape_string($link, $_FILES['avatar']['type']);
+
+//$sql = "SELECT * FROM users";
+
+//if (substr($imageType,0,5) == 'image'){
+
+//$sql = "INSERT INTO users (user_id, email_address, first_name, last_name, pass_word, avatar_image)
+//VALUES ('', '$email', '$firstname', '$lastname', '$password', $imageData)";
+    
+//}
+
+//$sql = "INSERT INTO users (user_id, email_address, first_name, last_name, pass_word, avatar_image)
+//VALUES ('', '$email', '$firstname', '$lastname', '$password', $imageData)";
+
+//   $result = mysqli_query($link, $sql); 
 
 
 if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false){
@@ -54,23 +77,25 @@ if (preg_match('#^[a-z0-9 ]+$#i', $_POST['password']) === 0) {
 }
 
 if (empty($_FILES['avatar']['tmp_name']) === false){
-    $file_ext = end(explode('.', $_FILES['avatar']['tmp_name']));
 
-    if (in_array(strtolower($file_ext), array('jpg', 'jpeg', 'png', 'gif')) === false){
-        $errors[] = 'Your avatar must be an image.';
-    }
+	echo "Avatar image exists!";
+
+	//should do some more checks, resize, etc. here
+
 }
 
 if (empty($errors)){ 
 
 	$password = $_POST['password'];
+	$email = $_POST['email'];
+	$firstname = $_POST['firstname'];
+	$lastname = $_POST['lastname'];
+	
 	$password = sha1($password);
 
-    insert_profile_info($_POST['email'], $_POST['firstname'], 
-    $_POST['lastname'], $password, (empty($_FILES['avatar']['tmp_name'])) ? false : $_FILES['avatar']['tmp_name']);
-    
-    } 
-    
+	upload($email,$firstname,$lastname,$password);
+	
+    }  
 
     $user_info = array(
         '$email' => htmlentities($_POST['email']), 
@@ -81,10 +106,9 @@ if (empty($errors)){
     
 } else { 
 
-	
         echo "";
         
-    //$user_info = fetch_user_info($_SESSION['uid']);
+    	//$user_info = fetch_user_info($_SESSION['uid']);
     
 }
 
@@ -115,8 +139,6 @@ if (empty($errors)){
         
             <div> 
                 <?php 
-                
-                
                 
                 if (isset($errors) === false){ 
                     echo 'Click Add to create a new profile.';
@@ -193,28 +215,26 @@ if (empty($errors)){
         </div>
               </form> 
               
-              </font>
-               </td>
-               <tr>
-               <td>
-               <font face=arial>
-       
-       <div>
-       <br /> 
-       <center>
        <p>
+   <br>
+   </font>
+   </td>
+   <tr>
+   <td>
+   <font face=arial>
+   	<center>
+       <p>
+       <br>
+       <a href=index.php>Home</a><br>
          <a href=login.php>Login</a>  | 
          <a href=logout.php>Log Out</a><br>
        <a href=add_profile.php>Register</a>  |   
        <a href=user_list.php>View Users</a>  
        <p>
-       </center>   
-       <br>
-       </div>   
-       
-       </font>
-       </td>
-       </table>
+    </center>   
+    </font>
+    </td>
+	</table>
       
       </font> 
 </body>

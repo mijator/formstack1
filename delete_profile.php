@@ -7,16 +7,15 @@ $user_info = array();
 $id = -1;
 
 if (isset($_GET['uid'])){
-	$uid = $_GET['uid'];
-} else {
-	$uid = -1;
-	
-}
+    	$user_info = fetch_user($_GET['uid']);
+    	$id = $_GET['uid'];
+    } else if (isset($_SESSION['uid'])){
+    	$user_info = fetch_user($_SESSION['uid']);
+    	$id = $_SESSION['uid'];
+    } else {
+    
+    }
 
-if (isset($_GET['uid'])){
-   	$user_info = @fetch_user_info($_GET['uid']);
-   	$id = $_GET['uid'];
-}
 
 //$errors = array();
 
@@ -64,9 +63,14 @@ if(isset($_POST['submit'])){
     
    <?php         
                      
-	$user_info = fetch_user($_GET['uid']);
+	//this is necessary 
+    if (isset($_GET['uid'])){
+    	$user_info = fetch_user($_GET['uid']);
+    } else if (isset($_SESSION['uid'])){
+    	$user_info = fetch_user($_SESSION['uid']);
+    } else {
     
-    //var_dump($user_info);
+    }
     
     if ($user_info === false){
     
@@ -117,28 +121,26 @@ function myFunction() {
                
         </div>
               
-              </font>
-              </td> 
-              <tr>
-              <td> 
-              <font face=arial>
-               
-       
-       <div>
-      <center>
-       <p> 
+              <p>
+   <br>
+   </font>
+   </td>
+   <tr>
+   <td>
+   <font face=arial>
+   	<center>
+       <p>
+       <br>
+       <a href=index.php>Home</a><br>
          <a href=login.php>Login</a>  | 
          <a href=logout.php>Log Out</a><br>
        <a href=add_profile.php>Register</a>  |   
        <a href=user_list.php>View Users</a>  
        <p>
-       </center>   
-        
-       </div>   
-       
-       </font>
-       </td>
-       </table>
+    </center>   
+    </font>
+    </td>
+	</table>
        
 </font>
 </body>

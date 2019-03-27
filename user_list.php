@@ -54,7 +54,7 @@ include('init.inc.php');
 
 	if ($result = mysqli_query($link, $query)){
 
-	echo "Result returned...<br>";          
+	echo "Results returned...<br>";          
 
 	?>
 	<p>
@@ -99,27 +99,26 @@ include('init.inc.php');
      
          </div>
    
-   <p>
+  <p>
+   <br>
    </font>
    </td>
    <tr>
    <td>
    <font face=arial>
-   
-   <p>
-   <center>
+   	<center>
        <p>
+       <br>
+       <a href=index.php>Home</a><br>
          <a href=login.php>Login</a>  | 
          <a href=logout.php>Log Out</a><br>
        <a href=add_profile.php>Register</a>  |   
        <a href=user_list.php>View Users</a>  
        <p>
-       </center>   
-        
-       
-       </font>
-       </td>
-       </table>
+    </center>   
+    </font>
+    </td>
+	</table>
        
        
        </font>

@@ -5,10 +5,10 @@ include("{$path}/init.inc.php");
 
 $user_info = array();
 
-if (isset($_GET['uid']))
-{
-   $user_info = fetch_user_info($_GET['uid']);
-}
+//if (isset($_GET['uid']))
+//{
+//   $user_info = fetch_user_info($_GET['uid']);
+//}
 
 
 
@@ -116,7 +116,14 @@ if (empty($errors)){
                 }
                 
     
-    $user_info = fetch_user($_GET['uid']);
+    //this is necessary 
+    if (isset($_GET['uid'])){
+    	$user_info = fetch_user($_GET['uid']);
+    } else if (isset($_SESSION['uid'])){
+    	$user_info = fetch_user($_SESSION['uid']);
+    } else {
+    
+    }
     
     //var_dump($user_info);
     
@@ -209,27 +216,26 @@ if (empty($errors)){
                
         </div>
                
-              </font>
-              </td>
-              <tr>
-              <td>
-              <font face=arial> 
-       
-       <div>
-       <center>
+              <p>
+   <br>
+   </font>
+   </td>
+   <tr>
+   <td>
+   <font face=arial>
+   	<center>
        <p>
+       <br>
+       <a href=index.php>Home</a><br>
          <a href=login.php>Login</a>  | 
          <a href=logout.php>Log Out</a><br>
        <a href=add_profile.php>Register</a>  |   
        <a href=user_list.php>View Users</a>  
        <p>
-       </center>   
-       
-       </div>   
-       
-       </font>
-       </td>
-       </table>
+    </center>   
+    </font>
+    </td>
+	</table>
       
       </font> 
 </body>

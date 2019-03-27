@@ -28,13 +28,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `user_id` int(11) PRIMARY KEY NOT NULL  AUTO_INCREMENT, 
-  `email_address` varchar(100) DEFAULT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `pass_word` varchar(50) DEFAULT NULL,
-  `avatar_image` blob NOT NULL
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    email_address VARCHAR(100) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    pass_word VARCHAR(40) NOT NULL,
+    avatar_image BLOB NOT NULL, 
+    UNIQUE KEY unique_email_index (email_address)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

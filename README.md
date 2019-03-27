@@ -18,13 +18,11 @@ Database: formstack1
 
 2. Put the folder called formstack1 and all files into your webserver htdocs directory.
 3. You should now be able to reach the application by going to http://localhost/formstack1/index.php
-4. To get the avatar working you will need to change the MySQL structure settings 
-on the avatar_image column so that it displays as MIME TYPE = .jpeg . I used phpMyAdmin for this.
 
 Limitations:
 
-1. Uploading avatar does not work yet.
-2. PHPUnit has not been implemented yet.
+1. Uploading an avatar image only accepts .jpg images for now.
+2. PHPUnit testing has not been implemented yet.
 
 Enjoy!
 

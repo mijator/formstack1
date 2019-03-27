@@ -3,25 +3,34 @@
 //profile.php
 include('init.inc.php');
 
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+
 $user_info = array();
+//$user_info2 = array();
 
+//if (isset($_GET['uid']))
+//{
+//   $user_info = fetch_user_info($_GET['uid']);
+//}
 
-if (isset($_GET['uid']))
-{
-   $user_info = fetch_user_info($_GET['uid']);
-}
-else
-{
-   if (empty($user_info)){
+//if (isset($_SESSION['uid']))
+//{
+//   $user_info2 = fetch_user_info($_SESSION['uid']);
+//}
+
+//else
+//{
+//   if (empty($user_info)){
    
-   		header("Location: login.php");
+//   		header("Location: login.php");
    	
-   } else {
+//   } else {
    
-   		$user_info = fetch_user_info($_SESSION['uid']);
+//   		$user_info = fetch_user_info($_SESSION['uid']);
    	
-   }
-}    
+//   }
+//}    
 
 
 
@@ -59,10 +68,14 @@ else
      
      <?php 
     
-    //this GET is necessary 
-    $user_info = fetch_user($_GET['uid']);
+    //this is necessary 
+    if (isset($_GET['uid'])){
+    	$user_info = fetch_user($_GET['uid']);
+    } else if (isset($_SESSION['uid'])){
+    	$user_info = fetch_user($_SESSION['uid']);
+    } else {
     
-    //var_dump($user_info);
+    }
     
     if ($user_info === false){
     
@@ -70,10 +83,35 @@ else
     
     } else {
     
-    ?>
+    	
+    	?>
     	
     <p>
-    <img src=template.jpg height=75 width=75>
+	
+	<?php 
+	
+	$image = $user_info['avatar_image'];
+	
+	if ($image !== ''){
+	
+		echo '<img src="data:image/jpeg;charset=utf-8;base64,';
+		echo $image; 
+		echo '" height=75 width=75><br>';
+		
+	} else {
+	
+		$image = "<img src=template.jpg height=75 width=75><br>";
+		
+		echo $image;
+		
+	}
+	
+	
+	
+	?>
+	
+<p>
+    
          
     <p>
     <a href="profile.php?uid=<?php echo $user_info['user_id']; ?>">
@@ -89,6 +127,7 @@ else
         
         <?php   
     }
+    
     ?>
     
           
@@ -104,23 +143,22 @@ else
    <tr>
    <td>
    <font face=arial>
-   <center>
+   	<center>
        <p>
        <br>
+       <a href=index.php>Home</a><br>
          <a href=login.php>Login</a>  | 
          <a href=logout.php>Log Out</a><br>
        <a href=add_profile.php>Register</a>  |   
        <a href=user_list.php>View Users</a>  
        <p>
-       </center>   
+    </center>   
+    </font>
+    </td>
+	</table>
        
        
-       </font>
-       </td>
-       </table>
-       
-       
-       </font>
+    </font>
        
      </body>
 </html>

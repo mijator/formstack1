@@ -1,6 +1,38 @@
 <?php
 
+//profile.php
 include('init.inc.php');
+
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+
+$user_info = array();
+//$user_info2 = array();
+
+//if (isset($_GET['uid']))
+//{
+//   $user_info = fetch_user_info($_GET['uid']);
+//}
+
+//if (isset($_SESSION['uid']))
+//{
+//   $user_info2 = fetch_user_info($_SESSION['uid']);
+//}
+
+//else
+//{
+//   if (empty($user_info)){
+   
+//   		header("Location: login.php");
+   	
+//   } else {
+   
+//   		$user_info = fetch_user_info($_SESSION['uid']);
+   	
+//   }
+//}    
+
+
 
 ?>
 
@@ -18,12 +50,12 @@ include('init.inc.php');
             input[type="submit" { margin:10px 0px 0px 100px; } 
             </style>
             
-            <title>Project Name</title>
+            <title>Profile</title>
         </head>
         <body>
         <font face=arial>
         <center>
-        <h3>Project Name</h3>
+        <h3>Profile</h3>
         </center>
         <p>
         
@@ -35,46 +67,59 @@ include('init.inc.php');
      <div>
      
      <?php 
-     
     
-	       
+    //this is necessary 
+    if (isset($_GET['uid'])){
+    	$user_info = fetch_user($_GET['uid']);
+    } else if (isset($_SESSION['uid'])){
+    	$user_info = fetch_user($_SESSION['uid']);
+    } else {
+    	$user_info = fetch_user(1);
+    }
+    
+    if ($user_info === false){
+    
+    	echo "User does not exist.";
+    
+    } else {
+    
+    	}
+    	
+    	?>
+    	
+    <p>
+	
 
-?>
+    
+          
          
+    
 
-         
-     
-         </div>
+	</div>
    
    <p>
+   <br>
    </font>
    </td>
    <tr>
    <td>
    <font face=arial>
-   
-   
-   <center>
+   	<center>
        <p>
+       <br>
+       <a href=index.php>Home</a><br>
          <a href=login.php>Login</a>  | 
          <a href=logout.php>Log Out</a><br>
        <a href=add_profile.php>Register</a>  |   
        <a href=user_list.php>View Users</a>  
        <p>
-       </center>   
-        
-       
-       </font>
-       </td>
-       </table>
+    </center>   
+    </font>
+    </td>
+	</table>
        
        
-       </font>
+    </font>
        
      </body>
 </html>
-     
-     
-     
-     
-     
